@@ -1,6 +1,6 @@
 import React from "react";
 import clsx from "clsx";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import Divider from "@material-ui/core/Divider";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
@@ -16,6 +16,7 @@ import MailIcon from "@material-ui/icons/Mail";
 import MenuIcon from "@material-ui/icons/Menu";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
+import Modal from "./components/Modal";
 
 const useStyles = makeStyles(theme => ({
   list: {
@@ -28,7 +29,8 @@ const useStyles = makeStyles(theme => ({
     display: "none"
   },
   button: {
-    marginTop: 100
+    marginTop: 100,
+    marginLeft: 10
   },
   appBar: {
     transition: theme.transitions.create(["margin", "width"], {
@@ -135,6 +137,7 @@ export default function SwipeableTemporaryDrawer() {
       >
         <Toolbar>
           <IconButton
+            onClick={toggleDrawer("left", true)}
             color="inherit"
             aria-label="open drawer"
             edge="start"
@@ -149,12 +152,10 @@ export default function SwipeableTemporaryDrawer() {
       </AppBar>
       <Button
         variant="contained"
-        onClick={toggleDrawer("left", true)}
-        startIcon={<MenuIcon />}
-        color="primary"
+        onClick={toggleDrawer("bottom", true)}
         className={classes.button}
-      />
-      <Button onClick={toggleDrawer("bottom", true)} className={classes.button}>
+        color="inherit"
+      >
         Open Bottom
       </Button>
       <input
@@ -170,6 +171,7 @@ export default function SwipeableTemporaryDrawer() {
         </Button>
       </label>
 
+      <Modal />
       <SwipeableDrawer
         open={state.left}
         onClose={toggleDrawer("left", false)}
